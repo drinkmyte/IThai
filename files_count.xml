@@ -2,7 +2,7 @@
 <pagescount>
 	<html_total>2</html_total>
 	<html_done>2</html_done>
-	<images>18</images>
+	<images>29</images>
 	<script>8</script>
 	<css>2</css>
 	<pdf/>
@@ -17,21 +17,21 @@
 	<txt/>
 	<autocad/>
 	<model_3d/>
-	<fonts>23</fonts>
-	<scraping_reload>2</scraping_reload>
+	<fonts>24</fonts>
+	<scraping_reload>1</scraping_reload>
 	<is_pretty_url>false</is_pretty_url>
 	<has_trailing_slash>false</has_trailing_slash>
 	<is_ebn>false</is_ebn>
 	<email>wdo@waybackmachinedownloader.com</email>
-	<theme_name>WmdTheme1015027</theme_name>
-	<server_url_front_page>https://www6.waybackmachinedownloader.com/wdo/files/demo/68b850cc32648.site123.me_wdo_waybackmachinedownloader.com_dgtekrui7f/</server_url_front_page>
+	<theme_name>WmdTheme1018069</theme_name>
+	<server_url_front_page>https://www6.waybackmachinedownloader.com/wdo/files/demo/68b850cc32648.site123.me_wdo_waybackmachinedownloader.com_c5kzgurlnu/</server_url_front_page>
 	<no_www_url>68b850cc32648.site123.me</no_www_url>
 	<hosted_domain/>
-	<original_archive_url>https://68b850cc32648.site123.me</original_archive_url>
-	<final_archive_url>https://68b850cc32648.site123.me/</final_archive_url>
+	<original_archive_url>http://68b850cc32648.site123.me</original_archive_url>
+	<final_archive_url>https://68b850cc32648.site123.me:443/</final_archive_url>
 	<front_page_code_date/>
 	<total_urls_from_api/>
 	<max_reached_live>false</max_reached_live>
 	<scrape_other_captures>false</scrape_other_captures>
-	<total_size>4852</total_size>
+	<total_size>5440</total_size>
 </pagescount>
