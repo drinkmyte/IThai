@@ -2,7 +2,7 @@
 <pagescount>
 	<html_total>2</html_total>
 	<html_done>2</html_done>
-	<images>46</images>
+	<images>47</images>
 	<script>8</script>
 	<css>2</css>
 	<pdf/>
@@ -23,8 +23,8 @@
 	<has_trailing_slash>false</has_trailing_slash>
 	<is_ebn>false</is_ebn>
 	<email>wdo@waybackmachinedownloader.com</email>
-	<theme_name>WmdTheme1018339</theme_name>
-	<server_url_front_page>https://www6.waybackmachinedownloader.com/wdo/files/demo/68b850cc32648.site123.me_wdo_waybackmachinedownloader.com_5ghe1a50ta/</server_url_front_page>
+	<theme_name>WmdTheme1019324</theme_name>
+	<server_url_front_page>https://www6.waybackmachinedownloader.com/wdo/files/demo/68b850cc32648.site123.me_wdo_waybackmachinedownloader.com_3p3fi1zlad/</server_url_front_page>
 	<no_www_url>68b850cc32648.site123.me</no_www_url>
 	<hosted_domain/>
 	<original_archive_url>http://68b850cc32648.site123.me</original_archive_url>
@@ -33,5 +33,5 @@
 	<total_urls_from_api/>
 	<max_reached_live>false</max_reached_live>
 	<scrape_other_captures>false</scrape_other_captures>
-	<total_size>16964</total_size>
+	<total_size>17280</total_size>
 </pagescount>
