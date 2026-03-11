@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I Thai Restaurang – Bögatan 47, Göteborg</title>
+  <meta name="description" content="Äkta thailändsk mat tillagad med kärlek. Välkommen till I Thai på Bögatan 47, Göteborg." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caladea:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --orange:       #d47c24;
+      --orange-dark:  #b36618;
+      --orange-light: #f4e5d6;
+      --white:        #ffffff;
+      --cream:        #fdf8f3;
+      --border:       #e8ddd4;
+      --text:         #2a2a2a;
+      --muted:        #7a7a7a;
+      --font: 'Caladea', serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--white); color: var(--text); font-family: var(--font); font-size: 17px; line-height: 1.6; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 12px 5vw; background: var(--white); border-bottom: 3px solid var(--orange); box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+    .nav-logo img { height: 44px; width: auto; }
+    .nav-links { display: flex; gap: 22px; list-style: none; align-items: center; }
+    .nav-links a { font-size: 0.88rem; letter-spacing: 0.06em; color: var(--text); font-weight: 700; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-phone { color: var(--orange) !important; font-size: 1.05rem !important; letter-spacing: 0.02em !important; text-transform: none !important; }
+    .nav-foodora { font-size: 0.78rem !important; color: var(--muted) !important; font-weight: 400 !important; text-transform: none !important; letter-spacing: 0 !important; }
+    .nav-foodora:hover { color: var(--orange) !important; text-decoration: underline; }
+
+    .hero { position: relative; height: 75vh; min-height: 480px; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; margin-top: 71px; }
+    .hero-slides { position: absolute; inset: 0; }
+    .hero-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.2s ease; }
+    .hero-slide.active { opacity: 1; }
+    .hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.42); }
+    .hero-content { position: relative; z-index: 1; padding: 0 20px; }
+    .hero-title { font-size: clamp(2.2rem, 7vw, 4.5rem); font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.1; text-shadow: 0 2px 10px rgba(0,0,0,0.4); opacity: 0; animation: fadeUp 0.7s 0.2s forwards; }
+    .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.9); margin-bottom: 14px; opacity: 0; animation: fadeUp 0.7s 0.4s forwards; }
+    .hero-phone { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 28px; opacity: 0; animation: fadeUp 0.7s 0.5s forwards; }
+    .hero-phone a { color: #fff; }
+    .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.7s 0.6s forwards; }
+
+    .btn { display: inline-block; padding: 12px 28px; border-radius: 4px; font-family: var(--font); font-size: 0.9rem; font-weight: 700; letter-spacing: 0.06em; cursor: pointer; transition: all 0.2s; border: 2px solid transparent; text-transform: uppercase; }
+    .btn-primary { background: var(--orange); color: #fff; border-color: var(--orange); }
+    .btn-primary:hover { background: var(--orange-dark); border-color: var(--orange-dark); transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: #fff; border-color: rgba(255,255,255,0.6); }
+    .btn-outline:hover { background: #fff; color: var(--text); border-color: #fff; }
+    .btn-dark { background: transparent; color: var(--text); border-color: var(--orange); }
+    .btn-dark:hover { background: var(--orange); color: #fff; }
+
+    section { padding: 80px 6vw; }
+    .section-label { font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; font-weight: 700; }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
+    .section-body { color: var(--muted); max-width: 520px; line-height: 1.8; }
+    .divider { width: 40px; height: 3px; background: var(--orange); margin: 14px 0 24px; border-radius: 2px; }
+
+    .about { background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .about-image img { width: 100%; height: 420px; object-fit: cover; border-radius: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+
+    .pricing-banner { background: var(--orange); padding: 18px 6vw; display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .pricing-banner p { color: #fff; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    .pricing-items { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+    .pricing-item { background: rgba(255,255,255,0.2); padding: 5px 13px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; color: #fff; }
+
+    .menu-section { background: var(--white); }
+    .menu-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; }
+    .menu-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tab-btn { padding: 8px 18px; background: #f9f9f9; border: 2px solid var(--border); color: var(--muted); border-radius: 20px; font-family: var(--font); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+    .tab-btn:hover, .tab-btn.active { background: var(--orange); border-color: var(--orange); color: #fff; }
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .menu-item { background: var(--white); padding: 16px; border-radius: 8px; display: flex; gap: 14px; align-items: flex-start; border: 1px solid var(--border); transition: box-shadow 0.2s, border-color 0.2s; }
+    .menu-item:hover { box-shadow: 0 4px 20px rgba(212,124,36,0.15); border-color: var(--orange); }
+    .menu-item-img { width: 80px; height: 80px; object-fit: cover; border-radius: 6px; flex-shrink: 0; }
+    .menu-item-img-placeholder { width: 80px; height: 80px; background: var(--orange-light); border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--orange); font-size: 0.68rem; font-weight: 700; text-align: center; }
+    .menu-item-info { flex: 1; min-width: 0; }
+    .menu-item-num { font-size: 0.72rem; color: var(--orange); font-weight: 700; letter-spacing: 0.08em; margin-bottom: 2px; display: block; }
+    .menu-item-info h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .menu-item-info p { font-size: 0.83rem; color: var(--muted); line-height: 1.5; }
+    .menu-category { display: none; }
+    .menu-category.visible { display: contents; }
+
+    .gallery-section { background: var(--cream); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 240px 240px; gap: 8px; margin-top: 40px; }
+    .gallery-grid .g-item { overflow: hidden; border-radius: 8px; }
+    .gallery-grid .g-item:first-child { grid-row: span 2; }
+    .gallery-grid .g-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .gallery-grid .g-item:hover img { transform: scale(1.05); }
+
+    .info-section { background: var(--orange-light); display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .hours-list { list-style: none; margin-top: 20px; }
+    .hours-list li { display: flex; justify-content: space-between; padding: 11px 8px; border-bottom: 1px solid var(--border); font-size: 0.95rem; border-radius: 4px; }
+    .hours-list li .day { color: var(--muted); }
+    .hours-list li .time { color: var(--text); font-weight: 700; }
+    .hours-list li.today { background: rgba(212,124,36,0.12); }
+    .hours-list li.today .day, .hours-list li.today .time { color: var(--orange); font-weight: 700; }
+    .contact-block { margin-top: 20px; }
+    .contact-block p { color: var(--muted); font-size: 0.95rem; line-height: 2; }
+    .contact-block strong { color: var(--text); }
+    .contact-block a { color: var(--orange); font-weight: 700; }
+    .contact-block a:hover { text-decoration: underline; }
+
+    footer { background: #2a2a2a; padding: 48px 6vw 28px; display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 40px; }
+    .footer-logo img { height: 42px; margin-bottom: 14px; filter: brightness(10); }
+    .footer-brand p { color: #aaa; font-size: 0.9rem; line-height: 1.7; max-width: 260px; }
+    .footer-col h5 { font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--orange); margin-bottom: 14px; }
+    .footer-col p, .footer-col a { color: #aaa; font-size: 0.9rem; line-height: 2.1; display: block; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--orange); }
+    .footer-bottom { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; justify-content: space-between; color: #666; font-size: 0.8rem; flex-wrap: wrap; gap: 10px; }
+    .footer-bottom a { color: #666; }
+    .footer-bottom a:hover { color: var(--orange); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .about, .info-section { grid-template-columns: 1fr; gap: 40px; }
+      .about-image img { height: 280px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-grid .g-item { height: 200px; }
+      .gallery-grid .g-item:first-child { grid-row: span 1; }
+      footer { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 580px) {
+      section { padding: 60px 5vw; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-grid .g-item { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#page-top" class="nav-logo">
+    <img src="uploads/11178850/400_68c81256ce5df.png" alt="I Thai" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="#om-oss">Om oss</a></li>
+    <li><a href="#meny">Meny</a></li>
+    <li><a href="#galleri">Galleri</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+    <li><a href="tel:+4631211111" class="nav-phone">📞 031-211111</a></li>
+    <li><a href="https://www.foodora.se/restaurant/v6ji/i-thai-restaurang" target="_blank" rel="nofollow" class="nav-foodora">Beställ via Foodora</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="page-top">
+  <div class="hero-slides">
+    <div class="hero-slide active" style="background-image:url('uploads/11178850/2000_68c1b95a7bc76.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('uploads/11178850/2000_68c1b9b326fc0.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('uploads/11178850/2000_68c1bada4c785.jpg')"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">Upptäck Smakerna av Thailand</h1>
+    <p class="hero-sub">Autentisk Thailändsk Mat, Tillagad med Kärlek — Bögatan 47, Göteborg</p>
+    <p class="hero-phone"><a href="tel:+4631211111">031-211111</a></p>
+    <div class="hero-cta">
+      <a href="#meny" class="btn btn-primary">Se menyn</a>
+      <a href="#kontakt" class="btn btn-outline">Hitta oss</a>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="om-oss">
+  <div class="about-image reveal">
+    <img src="uploads/11178850/2000_68b99c6670bac.jpg" alt="I Thai restaurang" />
+  </div>
+  <div class="reveal">
+    <p class="section-label">Om oss</p>
+    <h2 class="section-title">Välkommen till I Thai!</h2>
+    <div class="divider"></div>
+    <p class="section-body">Vi på I Thai erbjuder äkta thailändska smaker tillagade med kärlek och färska ingredienser. Vår passion är att ge varje gäst en enastående matupplevelse med genuina rätter och omtänksam service.</p>
+    <br />
+    <p class="section-body">Låt oss ta dig på en smakresa till Thailand — mitt i hjärtat av Göteborg.</p>
+    <br />
+    <a href="#meny" class="btn btn-dark">Se vår meny</a>
+  </div>
+</section>
+
+<div class="pricing-banner">
+  <p>Välj din protein →</p>
+  <div class="pricing-items">
+    <span class="pricing-item">Grönsaker 110 kr</span>
+    <span class="pricing-item">Tofu 115 kr</span>
+    <span class="pricing-item">Kyckling 120 kr</span>
+    <span class="pricing-item">Fläsk 120 kr</span>
+    <span class="pricing-item">Biff 125 kr</span>
+    <span class="pricing-item">Räkor 135 kr</span>
+  </div>
+</div>
+
+<section class="menu-section" id="meny">
+  <div class="menu-header">
+    <div class="reveal">
+      <p class="section-label">Vår meny</p>
+      <h2 class="section-title">Våra populäraste rätter</h2>
+    </div>
+    <div class="menu-tabs reveal">
+      <button class="tab-btn active" onclick="filterMenu('wok',this)">Wokade Rätter</button>
+      <button class="tab-btn" onclick="filterMenu('frit',this)">Friterade Rätter</button>
+      <button class="tab-btn" onclick="filterMenu('curry',this)">Curryrätter</button>
+      <button class="tab-btn" onclick="filterMenu('soppa',this)">Soppor</button>
+      <button class="tab-btn" onclick="filterMenu('nudel',this)">Nudlar</button>
+      <button class="tab-btn" onclick="filterMenu('special',this)">Special</button>
+    </div>
+  </div>
+  <div class="menu-grid">
+
+    <!-- WOKADE RÄTTER -->
+    <div class="menu-category visible" id="cat-wok">
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/11178850/800_68c7265f5016b.png" alt="Pad Pak Ruamit"><div class="menu-item-info"><span class="menu-item-num">Nr. 1</span><h4>Pad Pak Ruamit</h4><p>Wok med grönsaker, ostronsås och bambu</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/1000026527.jpg" alt="Pad Khing"><div class="menu-item-info"><span class="menu-item-num">Nr. 2</span><h4>Pad Khing</h4><p>Wok med ingefära, lök, purjolök, vitlök och paprika</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/1000026525.jpg" alt="Pad med mamuang"><div class="menu-item-info"><span class="menu-item-num">Nr. 3</span><h4>Pad med mamuang</h4><p>Krispiga cashewnötter och grönsaker i söt och milt kryddig sås</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/1000026529.jpg" alt="Pad Bai Kaprao"><div class="menu-item-info"><span class="menu-item-num">Nr. 4</span><h4>Pad Bai Kaprao</h4><p>Wok med basilika, paprika, lök, vitlök och bambu</p></div></div>
+      <div class="menu-item reveal"><div class="menu-item-img-placeholder">Foto<br>kommer</div><div class="menu-item-info"><span class="menu-item-num">Nr. 5</span><h4>Pad Preow Wan</h4><p>Wok med ananas, lök, tomat, grönsaker och tomatsås</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/1000026530.jpg" alt="Pad Yum Kai"><div class="menu-item-info"><span class="menu-item-num">Nr. 7</span><h4>Pad Yum Kai</h4><p>Wok med galangal, chili, limeblad, chilipasta, citrongräs och kokos</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/11178850/800_68c8483a5636d.png" alt="Pad Prik Pao"><div class="menu-item-info"><span class="menu-item-num">Nr. 8</span><h4>Pad Prik Pao</h4><p>Wok med chilipasta, lök, paprika, purjolök och grönsaker</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/1000026526.jpg" alt="Khao Pad"><div class="menu-item-info"><span class="menu-item-num">Nr. 9</span><h4>Khao Pad</h4><p>Klassisk stekt ris med ostronsås, ägg, grönsaker och citron</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/11178850/800_68bae99e4ee0b.jpg" alt="Pad Satay Gai"><div class="menu-item-info"><span class="menu-item-num">Nr. 10</span><h4>Pad Satay Gai</h4><p>Wokrätt med krämig jordnötssås och färska grönsaker</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/11178850/800_68c8486f84c83.png" alt="Lab Kai"><div class="menu-item-info"><span class="menu-item-num">Nr. 11</span><h4>Lab Kai</h4><p>Wok med lök, lime, chili och koriander</p></div></div>
+      <div class="menu-item reveal"><div class="menu-item-img-placeholder">Foto<br>kommer</div><div class="menu-item-info"><span class="menu-item-num">Nr. 13</span><h4>Kai Kra Tiem</h4><p>Wok med vitlök, grönsaker, peppar, koriander och sojasås</p></div></div>
+    </div>
+
+    <!-- FRITERADE RÄTTER -->
+    <div class="menu-category" id="cat-frit">
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/1000026521.jpg" alt="Goong Chup Paeng Thad"><div class="menu-item-info"><span class="menu-item-num">Nr. 25</span><h4>Goong Chup Paeng Thad</h4><p>Friterade räkor med sötsursås eller söt plommonsås</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/1000026531.jpg" alt="I Thai Satay Kai"><div class="menu-item-info"><span class="menu-item-num">Nr. 26</span><h4>I Thai Satay Kai</h4><p>Friterad currymarinerad kycklingfilé med sallad och jordnötssås</p></div></div>
+      <div class="menu-item reveal"><div class="menu-item-img-placeholder">Foto<br>kommer</div><div class="menu-item-info"><span class="menu-item-num">Nr. 27</span><h4>Satay Kai</h4><p>Saftiga kycklingspett med smakrik marinad och krämig jordnötssås</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/11178850/800_68b953dd767de.jpg" alt="Små Vårrullar"><div class="menu-item-info"><span class="menu-item-num">Nr. 28a</span><h4>Små Vårrullar <span style="color:var(--orange);float:right">50 kr</span></h4><p>8 små vegetariska vårrullar, serveras med dippsås</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/11178850/800_68b953dd767de.jpg" alt="Stora Vårrullar"><div class="menu-item-info"><span class="menu-item-num">Nr. 28b</span><h4>Stora Vårrullar <span style="color:var(--orange);float:right">95 kr</span></h4><p>3 stora vårrullar fyllda med grönsaker och valfri protein, serveras med dippsås</p></div></div>
+    </div>
+
+    <!-- CURRYRÄTTER -->
+    <div class="menu-category" id="cat-curry">
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/1000026518.jpg" alt="Gaeng Panaeng"><div class="menu-item-info"><span class="menu-item-num">Nr. 14</span><h4>Gaeng Panaeng</h4><p>Gryta med panaengcurry, kokosmjölk, grönsaker och limeblad</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/1000026528.jpg" alt="Gaeng Ped"><div class="menu-item-info"><span class="menu-item-num">Nr. 15</span><h4>Gaeng Ped</h4><p>Rödcurry gryta med bambuskott, gurka och paprika</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/11178850/800_68baebc731b21.jpg" alt="Gaeng Kiew Wan"><div class="menu-item-info"><span class="menu-item-num">Nr. 16</span><h4>Gaeng Kiew Wan</h4><p>Gröncurry med kokosmjölk, grönsaker, basilika och bambuskott</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/11178850/800_68c84991e3317.png" alt="Kaeng Massaman"><div class="menu-item-info"><span class="menu-item-num">Nr. 17</span><h4>Kaeng Massaman</h4><p>Gryta med massaman curry, kokosmjölk, potatis och cashewnötter</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/11178850/800_68c849faeadf9.png" alt="Kaeng Kari"><div class="menu-item-info"><span class="menu-item-num">Nr. 18</span><h4>Kaeng Kari</h4><p>Gryta med currypulver, kokosmjölk och grönsaker</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/1000026519.jpg" alt="Kaeng Khoa Saparot"><div class="menu-item-info"><span class="menu-item-num">Nr. 19</span><h4>Kaeng Khoa Saparot</h4><p>Gryta med röd curry, kokosmjölk, ananas, paprika och morot</p></div></div>
+    </div>
+
+    <!-- SOPPOR -->
+    <div class="menu-category" id="cat-soppa">
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/11178850/800_68baed168fcfa.jpg" alt="Tom Yum"><div class="menu-item-info"><span class="menu-item-num">Nr. 29</span><h4>Tom Yum</h4><p>Het och sur soppa med citrongräs, galangal och limeblad</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/1000026523.jpg" alt="Tom Kha"><div class="menu-item-info"><span class="menu-item-num">Nr. 30</span><h4>Tom Kha</h4><p>Soppa med kokosmjölk, champinjoner, limeblad, citrongräs och galangal</p></div></div>
+    </div>
+
+    <!-- NUDLAR -->
+    <div class="menu-category" id="cat-nudel">
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/1000026524.jpg" alt="Pad Thai"><div class="menu-item-info"><span class="menu-item-num">Nr. 20</span><h4>Pad Thai</h4><p>Klassisk nudelrätt med risnudlar, ägg, grönsaker — toppas med jordnötter</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/1000026522.jpg" alt="Pad Mee"><div class="menu-item-info"><span class="menu-item-num">Nr. 21</span><h4>Pad Mee</h4><p>Wokade vermicelli-nudlar med grönsaker, kryddor och protein</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/1000026520.jpg" alt="Pad Si-eiow"><div class="menu-item-info"><span class="menu-item-num">Nr. 22</span><h4>Pad Si-eiow</h4><p>Wok med risnudlar, ägg, sojasås, grönsaker, jordnötter och chili</p></div></div>
+      <div class="menu-item reveal"><div class="menu-item-img-placeholder">Foto<br>kommer</div><div class="menu-item-info"><span class="menu-item-num">Nr. 23</span><h4>Baa Mee Nam Kaeng</h4><p>Gryta med äggnudlar, kokosmjölk, röd curry och grönsaker</p></div></div>
+    </div>
+
+    <!-- SPECIAL -->
+    <div class="menu-category" id="cat-special">
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/11178850/800_68cc1bfad940f.png" alt="Som Tum Thai"><div class="menu-item-info"><span class="menu-item-num">Nr. 31</span><h4>Som Tum Thai</h4><p>Klassisk papayasallad gjord på papaya och fisksås</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/1000026532.jpg" alt="Som Tham Pla La"><div class="menu-item-info"><span class="menu-item-num">Nr. 32</span><h4>Som Tham Pla La <span style="color:var(--orange);float:right">140 kr</span></h4><p>Kryddig papayasallad med pla la (fermenterad fisk)</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/Screenshot_2026-03-06-15-04-03-220_com_facebook_orca-edit.jpg" alt="Nr. 33" style="object-position: top;"><div class="menu-item-info"><span class="menu-item-num">Nr. 33</span><h4>Kai Thod Kra Tiem <span style="color:var(--orange);float:right">140 kr</span></h4><p>Friterad kyckling med vitlök och dippsås. Klibbigt ris 30 kr extra.</p></div></div>
+      <div class="menu-item reveal"><img class="menu-item-img" src="uploads/1000026535.jpg" alt="Nr. 34"><div class="menu-item-info"><span class="menu-item-num">Nr. 34</span><h4>Pla Rad Prik <span style="color:var(--orange);float:right">250 kr</span></h4><p>Hel fisk med röd currysås, paprika och örter</p></div></div>
+    </div>
+
+  </div>
+</section>
+
+<section class="gallery-section" id="galleri">
+  <div class="reveal">
+    <p class="section-label">Galleri</p>
+    <h2 class="section-title">Vår Restaurang</h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="g-item reveal"><img src="https://files.cdn-files-a.com/uploads/11178850/2000_68bdae662e547.jpg" alt="I Thai restaurang"></div>
+    <div class="g-item reveal"><img src="https://files.cdn-files-a.com/uploads/11178850/2000_68bdae5f43cfa.jpg" alt="I Thai restaurang"></div>
+    <div class="g-item reveal"><img src="https://files.cdn-files-a.com/uploads/11178850/2000_68bdae5e04979.jpg" alt="I Thai restaurang"></div>
+    <div class="g-item reveal"><img src="https://files.cdn-files-a.com/uploads/11178850/2000_68bdae9e49ecd.jpg" alt="I Thai restaurang"></div>
+    <div class="g-item reveal"><img src="https://files.cdn-files-a.com/uploads/11178850/2000_68bdaf7e3e907.jpg" alt="I Thai restaurang"></div>
+  </div>
+</section>
+
+<section class="info-section" id="kontakt">
+  <div class="reveal">
+    <p class="section-label">Öppettider</p>
+    <h2 class="section-title">När vi håller öppet</h2>
+    <div class="divider"></div>
+    <ul class="hours-list">
+      <li><span class="day">Måndag</span><span class="time">11:00 – 20:00</span></li>
+      <li><span class="day">Tisdag</span><span class="time">11:00 – 20:00</span></li>
+      <li><span class="day">Onsdag</span><span class="time">11:00 – 20:00</span></li>
+      <li><span class="day">Torsdag</span><span class="time">11:00 – 20:00</span></li>
+      <li><span class="day">Fredag</span><span class="time">11:00 – 20:00</span></li>
+      <li><span class="day">Lördag</span><span class="time">12:00 – 20:00</span></li>
+      <li><span class="day">Söndag</span><span class="time">12:00 – 20:00</span></li>
+    </ul>
+  </div>
+  <div class="reveal">
+    <p class="section-label">Hitta oss</p>
+    <h2 class="section-title">Kontakta oss</h2>
+    <div class="divider"></div>
+    <div class="contact-block">
+      <p><strong>Adress</strong><br>Bögatan 47, 412 72 Göteborg</p>
+      <br>
+      <p><strong>Telefon</strong><br><a href="tel:+4631211111">031-211111</a></p>
+      <br>
+      <p><strong>E-post</strong><br><a href="/cdn-cgi/l/email-protection#f19583989f9a9c888594b1969c90989ddf929e9c"><span class="__cf_email__" data-cfemail="6b0f1902050006121f0e2b0c060a020745080406">[email&#160;protected]</span></a></p>
+      <br>
+      <p><strong>Beställ online</strong><br><a href="https://www.foodora.se/restaurant/v6ji/i-thai-restaurang" target="_blank" rel="nofollow">Foodora →</a></p>
+    </div>
+    <br>
+    <a href="https://maps.google.com/?q=Bögatan+47,+412+72+Göteborg" target="_blank" class="btn btn-primary">Öppna i Google Maps</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <div class="footer-logo"><img src="uploads/11178850/400_68c81256ce5df.png" alt="I Thai"></div>
+    <p>Äkta thailändska smaker i hjärtat av Göteborg — tillagade med kärlek och färska ingredienser.</p>
+  </div>
+  <div class="footer-col">
+    <h5>Snabblänkar</h5>
+    <a href="#om-oss">Om oss</a>
+    <a href="#meny">Meny</a>
+    <a href="#galleri">Galleri</a>
+    <a href="#kontakt">Kontakt</a>
+  </div>
+  <div class="footer-col">
+    <h5>Kontakt</h5>
+    <p>Bögatan 47, 412 72 Göteborg</p>
+    <a href="tel:+4631211111">031-211111</a>
+    <a href="/cdn-cgi/l/email-protection#690d1b00070204101d0c290e04080005470a0604"><span class="__cf_email__" data-cfemail="0b6f7962656066727f6e4b6c666a626725686466">[email&#160;protected]</span></a>
+    <br><p>Mån–Fre 11:00–20:00</p>
+    <p>Lör–Sön 12:00–20:00</p>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 I Thai Restaurang – Bögatan 47, Göteborg</span>
+    <span>Byggd av <a href="https://github.com/drinkmyte" target="_blank">Drinkmyte</a></span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const slides = document.querySelectorAll('.hero-slide');
+  let cur = 0;
+  setInterval(() => {
+    slides[cur].classList.remove('active');
+    cur = (cur + 1) % slides.length;
+    slides[cur].classList.add('active');
+  }, 4500);
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  function filterMenu(cat, btn) {
+    document.querySelectorAll('.menu-category').forEach(c => c.classList.remove('visible'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('cat-' + cat)
